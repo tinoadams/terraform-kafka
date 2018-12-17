@@ -2,6 +2,8 @@
 #
 # Script to mount volumes
 
+while [ ! -b ${device_name} ] ; do sleep 1 ; echo "waiting for EBS to be attached" ; done
+
 # format EBS volume
 if [ `file -s ${device_name} | cut -d ' ' -f 2` = 'data' ]; then
     mkfs -t ext4 ${device_name}
