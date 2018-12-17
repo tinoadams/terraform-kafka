@@ -1,8 +1,13 @@
 #!/bin/bash
+set -e
 # Script to start a zookeeper Docker container
 
 # unload command line
 id=$1
+
+# update java
+sudo yum remove -y java-1.7.0-openjdk
+sudo yum install -y java-1.8.0
 
 # create an array of IPs
 ip_addrs=( ${ip_addrs} )

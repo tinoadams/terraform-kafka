@@ -64,7 +64,7 @@ variable "kafka_instance_type" {
 
 variable "kafka_version" {
   description = "Kafka version"
-  default = "0.11.0.0"
+  default = "2.1.0"
 }
 
 variable "scala_version" {
