@@ -4,11 +4,6 @@
 
 while [ ! -b ${device_name} ] ; do sleep 1 ; echo "waiting for EBS to be attached" ; done
 
-# format EBS volume
-if [ `file -s ${device_name} | cut -d ' ' -f 2` = 'data' ]; then
-    mkfs -t ext4 ${device_name}
-fi
-
 # create the mount point
 if [ ! -d ${mount_point} ]; then
     mkdir -p ${mount_point}
@@ -16,7 +11,7 @@ fi
 
 # mount the volume
 if ! grep ${device_name} /etc/mtab > /dev/null; then
-    mount ${device_name} ${mount_point}
+    mount ${device_name} ${mount_point} || (mkfs -t ext4 ${device_name} && mount ${device_name} ${mount_point})
 fi
 
 # update fstab
