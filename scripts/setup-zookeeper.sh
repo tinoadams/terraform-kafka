@@ -54,3 +54,5 @@ echo $id > /var/lib/zookeeper/myid
 # change ownership
 chown -R zookeeper:zookeeper /opt/zookeeper
 chown -R zookeeper:zookeeper /var/lib/zookeeper
+
+echo "PS1='[\u@zookeeper|$id|${environment} \W]\$ '" >> /etc/bashrc

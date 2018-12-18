@@ -17,6 +17,8 @@ data "template_file" "setup-zookeeper" {
     repo = "${var.zookeeper_repo}"
     version = "${var.zookeeper_version}"
     ip_addrs = "${join(" ", aws_instance.zookeeper-server.*.private_ip)}"
+    aws_es_endpoint="${var.aws_es_endpoint}"
+    environment="${var.environment}"
   }
 }
 
@@ -40,6 +42,7 @@ data template_file "setup-kafka" {
     log_retention = "${var.log_retention}"
     repl_factor = "${data.aws_subnet.subnet.count}"
     aws_es_endpoint="${var.aws_es_endpoint}"
+    environment="${var.environment}"
   }
 }
 

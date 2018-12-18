@@ -46,7 +46,7 @@ echo "# replication factor" >> /tmp/server.properties
 echo "default.replication.factor=${repl_factor}" >> /tmp/server.properties
 mv /tmp/server.properties config/server.properties
 
-echo "PS1='[\u@kafka|$broker_id|$az \W]\$ '" >> /etc/bashrc
+echo "PS1='[\u@kafka|$broker_id|${environment}|$az \W]\$ '" >> /etc/bashrc
 
 amazon-linux-extras install -y docker
 service docker start
@@ -56,5 +56,12 @@ docker run -d --name aws-es-proxy --restart unless-stopped --network host abutah
 curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.5.3-x86_64.rpm
 rpm -vi filebeat-6.5.3-x86_64.rpm && rm -f filebeat-6.5.3-x86_64.rpm
 filebeat modules enable kafka
+
+sed -i 's|output\.elasticsearch:|output.elasticsearch:\n  index: "filebeat-${environment}-%{[beat.version]}-%{+yyyy.MM.dd}"|' /etc/filebeat/filebeat.yml
+echo 'setup.template.name: "filebeat"' >> /etc/filebeat/filebeat.yml
+echo 'setup.template.pattern: "filebeat-${environment}-*"' >> /etc/filebeat/filebeat.yml
+filebeat setup  -e --template
+
 chkconfig filebeat on
 service filebeat start
+
