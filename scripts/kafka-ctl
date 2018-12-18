@@ -4,7 +4,7 @@
 # chkconfig: - 80 20
 # description: kafka
 
-KAFKA_HOME=/opt/kafka/kafka_${scala_version}-${kafka_version}
+KAFKA_HOME=/opt/kafka_${scala_version}-${kafka_version}
 KAFKA_USER=root
 KAFKA_SCRIPT=$KAFKA_HOME/bin/kafka-server-start.sh
 KAFKA_CONFIG=$KAFKA_HOME/config/server.properties

@@ -143,3 +143,8 @@ variable "cloudwatch_alarm_arn" {
   type = "string"
   description = "cloudwatch alarm ARN"
 }
+
+variable "aws_es_endpoint" {
+  type = "string"
+  description = "AWS managed ElasticSearch instance to ship logs to"
+}

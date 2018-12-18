@@ -80,9 +80,9 @@ resource "null_resource" "kafka-nodes" {
       "sudo chown root:root /etc/init.d/kafka",
       "sudo chkconfig kafka on",
       "sudo service kafka start",
-      "sudo mv /tmp/kafka-status.sh /opt/kafka",
-      "sudo chmod a+x /opt/kafka/kafka-status.sh",
-      "echo '* * * * * /opt/kafka/kafka-status.sh' > /tmp/crontab",
+      "sudo mv /tmp/kafka-status.sh /opt",
+      "sudo chmod a+x /opt/kafka-status.sh",
+      "echo '* * * * * /opt/kafka-status.sh' > /tmp/crontab",
       "sudo crontab /tmp/crontab",
       "rm /tmp/crontab"
     ]

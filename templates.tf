@@ -39,6 +39,7 @@ data template_file "setup-kafka" {
     num_partitions = "${var.num_partitions}"
     log_retention = "${var.log_retention}"
     repl_factor = "${data.aws_subnet.subnet.count}"
+    aws_es_endpoint="${var.aws_es_endpoint}"
   }
 }
 
