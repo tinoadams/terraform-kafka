@@ -46,7 +46,7 @@ echo "# replication factor" >> /tmp/server.properties
 echo "default.replication.factor=${repl_factor}" >> /tmp/server.properties
 mv /tmp/server.properties config/server.properties
 
-echo "PS1='[\u@kafka-${broker_id}-${az} \W]\$ '" >> /etc/bashrc
+echo "PS1='[\u@kafka|$broker_id|$az \W]\$ '" >> /etc/bashrc
 
 amazon-linux-extras install -y docker
 service docker start
